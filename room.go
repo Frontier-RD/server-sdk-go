@@ -157,6 +157,15 @@ func WithICETransportPolicy(iceTransportPolicy webrtc.ICETransportPolicy) Connec
 	}
 }
 
+// WithSettingEngineFunc customizes Pion's SettingEngine after the SDK applies
+// its defaults and before the WebRTC API is created. The function is called for
+// every PeerConnection created for the room.
+func WithSettingEngineFunc(fn func(*webrtc.SettingEngine)) ConnectOption {
+	return func(p *signalling.ConnectParams) {
+		p.SettingEngineFunc = fn
+	}
+}
+
 // WithDisableRegionDiscovery disables automatic region discovery for LiveKit Cloud.
 func WithDisableRegionDiscovery() ConnectOption {
 	return func(p *signalling.ConnectParams) {

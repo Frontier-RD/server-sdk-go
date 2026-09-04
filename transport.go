@@ -81,6 +81,7 @@ type PCTransportParams struct {
 	OnRTTUpdate                func(rtt uint32)
 	IsSender                   bool
 	DTLSEllipticCurves         []dtlsElliptic.Curve
+	SettingEngineFunc          func(*webrtc.SettingEngine)
 }
 
 func (t *PCTransport) registerDefaultInterceptors(params PCTransportParams, i *interceptor.Registry) error {
@@ -218,6 +219,9 @@ func NewPCTransport(params PCTransportParams) (*PCTransport, error) {
 	lf := pionlogger.NewLoggerFactory(logger)
 	if lf != nil {
 		se.LoggerFactory = lf
+	}
+	if params.SettingEngineFunc != nil {
+		params.SettingEngineFunc(&se)
 	}
 
 	api := webrtc.NewAPI(webrtc.WithMediaEngine(m), webrtc.WithSettingEngine(se), webrtc.WithInterceptorRegistry(i))

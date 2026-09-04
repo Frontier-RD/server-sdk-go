@@ -90,6 +90,11 @@ type ConnectParams struct {
 
 	ICETransportPolicy webrtc.ICETransportPolicy
 
+	// SettingEngineFunc, when set, is called after the SDK configures Pion's
+	// SettingEngine and before the WebRTC API is created. It lets callers opt in
+	// to Pion settings the SDK does not otherwise expose, such as network types.
+	SettingEngineFunc func(*webrtc.SettingEngine)
+
 	DTLSEllipticCurves []dtlsElliptic.Curve // FIPS 140: override default DTLS curves
 
 	// internal use
