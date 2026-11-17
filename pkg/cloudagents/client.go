@@ -149,9 +149,9 @@ func (c *Client) DeployAgentV2(
 	buildLogStreamWriter io.Writer,
 ) error {
 	resp, err := c.AgentClient.DeployAgentV2(ctx, &lkproto.DeployAgentV2Request{
-		AgentId:     agentID,
-		Secrets:     secrets,
-		Environment: environment,
+		AgentId:    agentID,
+		Secrets:    secrets,
+		Deployment: environment,
 	})
 	if err != nil {
 		return err
