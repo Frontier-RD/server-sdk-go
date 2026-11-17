@@ -24,7 +24,10 @@ Version 2 of the <platform> SDK contains a small set of breaking changes. Read t
 go get github.com/livekit/server-sdk-go/v2
 ```
 
-Note: since v1.0 release, this package requires Go 1.18+ in order to build.
+This Frontier maintenance branch requires Go 1.26 or later. It retains the
+`WithSettingEngineFunc` backport on SDK 2.16.3 while using protocol 1.46.7
+and patched JOSE v4.1.6. The obsolete simulation scenario CRUD methods are
+removed to match that protocol; room/audio transport hooks remain unchanged.
 
 ## Token creation
 
